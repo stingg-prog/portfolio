@@ -53,7 +53,7 @@ class Project(models.Model):
     description = models.TextField(help_text="Detailed description of the project engineering features")
     github_url = models.URLField(max_length=500, blank=True, null=True, help_text="GitHub repository URL")
     live_url = models.URLField(max_length=500, blank=True, null=True, help_text="Live website URL")
-    image = models.CharField(max_length=300, default='static/assets/syafra.png', help_text="Static relative image path (e.g., assets/syafra.png)")
+    image = models.CharField(max_length=300, default='assets/syafra.png', help_text="Static relative image path inside core/static/ (e.g., assets/syafra.png)")
     tags = models.CharField(max_length=300, help_text="Comma-separated technologies (e.g., Python, Django, PostgreSQL)")
     order = models.IntegerField(default=0, help_text="Integer indicating rendering order (lower numbers display first)")
 
@@ -66,6 +66,13 @@ class Project(models.Model):
     def get_tags_list(self):
         """Returns the tags as a clean list for Django templates"""
         return [tag.strip() for tag in self.tags.split(',') if tag.strip()]
+
+    @property
+    def image_static_path(self):
+        """Return a normalized static-relative path for template use."""
+        if self.image.startswith('static/'):
+            return self.image.split('static/', 1)[1]
+        return self.image
 
 
 class Certification(models.Model):

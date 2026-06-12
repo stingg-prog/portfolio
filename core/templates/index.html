@@ -460,7 +460,7 @@
             <!-- Bento Large: Primary Flagship Project (SYAFRA) -->
             <div class="bento-item bento-large glass-panel" style="padding: 0;">
               <div class="bento-image-container">
-                <img src="{% static project.image %}" alt="{{ project.title }} Dashboard Preview" loading="lazy" decoding="async" />
+                <img src="{% static project.image_static_path %}" alt="{{ project.title }} Dashboard Preview" loading="lazy" decoding="async" />
                 <div class="bento-overlay">
                   <h3 class="project-logo">{{ project.title }}</h3>
                   {% if project.live_url %}
